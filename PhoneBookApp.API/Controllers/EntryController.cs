@@ -22,7 +22,7 @@ namespace PhoneBookApp.API.Controllers
 
         [HttpGet]
         [Route("getall")]
-        public ActionResult<List<Entry>> Get(int? phoneBookId)
+        public ActionResult<List<EntryModel>> Get(int? phoneBookId)
         {
             if (phoneBookId == null)
                 return BadRequest(ModelState);
