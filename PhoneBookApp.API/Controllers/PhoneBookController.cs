@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using PhoneBookApp.Data.Ef.Concrete;
-using PhoneBookApp.Services.Interfaces;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Cors;
+﻿using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
+using PhoneBookApp.Data.Ef.Concrete;
 using PhoneBookApp.Data.Models;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using PhoneBookApp.Services.Interfaces;
+using System.Collections.Generic;
 
 namespace PhoneBookApp.API.Controllers
 {
