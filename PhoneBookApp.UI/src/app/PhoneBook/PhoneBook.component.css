@@ -1,0 +1,29 @@
+.error-container {
+	background-color: red;
+	position: absolute;
+	margin-top: -50px;
+	left: 0;
+	right: 0;
+	text-align: center;
+	width: 100%;
+	white-space: nowrap;
+}
+
+.error {
+	font-size: 0.9em;
+	color: white;
+	padding: 2px;
+	display: inline-block;
+}
+
+
+	.container {
+		display: inline-block;
+		text-align: left;
+		vertical-align: top;
+		width: 320px;
+		
+			
+	}
+	
+

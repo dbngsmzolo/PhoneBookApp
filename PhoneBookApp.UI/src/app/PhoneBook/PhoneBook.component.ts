@@ -12,7 +12,7 @@ export class PhoneBookComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private phoneBookService: PhoneBookService) { }
 
   phoneBooks = [];
-  entires = [];
+  entries = [];
   newEntry = false;
   entryForm: FormGroup;
   currentPhoneBook = null;
@@ -24,22 +24,26 @@ export class PhoneBookComponent implements OnInit {
   ngOnInit(): void {
     this.loadPhoneBooks();
     this.entryForm = this.formBuilder.group({
-      name: ['', [Validators.minLength(2), Validators.maxLength(70), Validators.required]],
-      phoneNumber: ['', [Validators.minLength(2), Validators.maxLength(70), Validators.required, Validators.pattern(/^[0-9]$/)]],
+      name: ['', [Validators.minLength(2), Validators.maxLength(100), Validators.required, Validators.pattern(/^[a-zA-ZÀ-ÿšū’][a-zA-ZÀ-ÿšū'’.-\s]*[a-zA-ZÀ-ÿšū.]$/)]],
+      phoneNumber: ['', [Validators.minLength(10), Validators.maxLength(10), Validators.required, Validators.pattern(/^(0)(6[0-9]|7([1-4]|(6|8|9))|8[1-4])(\d{7})$/)]],
       phoneBookId: ''
     });
   }
   private loadPhoneBooks(){
     this.phoneBookService.getAll().subscribe(result => {
       this.phoneBooks = result;
-    })
+    }, error => {
+      this.errorMessage = 'An error has accured, please try again';
+    });
   }
 
   public openPhoneBook(pb){
     this.currentPhoneBook = pb;
     this.phoneBookService.getAllEntries(pb.id).subscribe(result => {
-      this.entires = result;
-    })
+      this.entries = result;
+    }, error => {
+      this.errorMessage = 'An error has accured, please try again';
+    });
   }
 
   submit() {
@@ -47,14 +51,14 @@ export class PhoneBookComponent implements OnInit {
     this.responseMessage = '';
     this.entryForm.value.phoneBookId = this.currentPhoneBook.id;
     this.phoneBookService.create(this.entryForm.value).subscribe(result => {
-      this.responseMessage = 'Text kruched and saved to file, please check your file.';
+      this.responseMessage = 'New Entry Saved.';
       this.newEntry = false;
-      this.entires = [];
+      this.entries = [];
       this.currentPhoneBook = null;
       this.loadPhoneBooks();
     }, error => {
-      this.errorMessage = error.error;
-    })
+      this.errorMessage = 'An error has accured, please try again';
+    });
     this.showMsg();
     this.resetForm();
   }

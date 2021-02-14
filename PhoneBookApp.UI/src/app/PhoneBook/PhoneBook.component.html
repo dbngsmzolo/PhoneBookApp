@@ -11,31 +11,59 @@
         </tr>
     </table>
 </div>
-
+<div>
 <button *ngIf="currentPhoneBook" (click)="newEntry=true">Add Entry to {{currentPhoneBook.name}}</button>
-<div *ngIf="entires.length > 0 && newEntry ===false">
+<div *ngIf="entries.length > 0 && newEntry ===false">
     <table>
         <tr>
             <th>Entry Name</th><th>Phone Number</th>
         </tr>
-        <tr *ngFor="let item of entires; index as i; trackBy: trackByFn">
+        <tr *ngFor="let item of entries; index as i; trackBy: trackByFn">
             <td>{{item.name}}</td>
             <td>{{item.phoneNumber}}</td>
         </tr>
     </table>
 </div>
+</div>
 
-<form *ngIf="newEntry" name="entryForm" [formGroup]="entryForm" [hidden]="submitted">
+<form name="entryForm" *ngIf="newEntry" name="entryForm" [formGroup]="entryForm" [hidden]="submitted">
     <div class="container">
       <div class="item">
         
-        <input placeholder="Enter name"  type="text" id="name" tabindex="1" formControlName="name"/><br/>
-        <input placeholder="Enter phone number"  type="text" id="phoneNumber" tabindex="2" formControlName="phoneNumber"/>
+        <input placeholder="Enter name"  type="text" id="name" tabindex="1" formControlName="name"/>
+        <div class="validation-icon"
+        [ngClass]="{'validation-icon-fail' : submitted && formControls.name.errors, 'validation-icon-success icon-success' : !submitted && !formControls.name.errors}">
       </div>
+      <div *ngIf="formControls.name.errors && (formControls.name.dirty || formControls.name.touched)"
+        class="error-container">
+        <span class="error" *ngIf="formControls.name.errors.required">Name required</span>
+        <span class="error" *ngIf="formControls.name.errors.pattern && !formControls.name.errors.minlength 
+                               && !formControls.name.errors.maxlength">Name is invalid</span>
+        <span class="error" *ngIf="formControls.name.errors.maxlength">Maximum length exceeded</span>
+        <span class="error" *ngIf="formControls.name.errors.minlength">Name must have atleast 2 letters</span>
+      </div>
+      </div>
+    </div>
+      <div class="container">
+        <div class="item">
+        
+            <input placeholder="Enter Phone number"  type="text" id="phoneNumber" tabindex="2" formControlName="phoneNumber"/>
+            <div class="validation-icon"
+            [ngClass]="{'validation-icon-fail' : submitted && formControls.phoneNumber.errors, 'validation-icon-success icon-success' : !submitted && !formControls.phoneNumber.errors}">
+          </div>
+          <div *ngIf="formControls.phoneNumber.errors && (formControls.phoneNumber.dirty || formControls.phoneNumber.touched)"
+            class="error-container">
+            <span class="error" *ngIf="formControls.phoneNumber.errors.required">Phone number required</span>
+            <span class="error" *ngIf="formControls.phoneNumber.errors.pattern">Phone number is invalid</span>
+            <span class="error" *ngIf="formControls.phoneNumber.errors.maxlength">Maximum length exceeded</span>
+          </div>
+          </div>
       
     </div>
+    <br><br>
     <div>
-      <input type="submit" value="Save" class="primary" tabindex="3" (click)='submit()'>
+      <input type="submit" value="Save" class="primary" tabindex="3" (click)='submit()'
+      [disabled]="entryForm.invalid">
     </div>
   </form>
 
