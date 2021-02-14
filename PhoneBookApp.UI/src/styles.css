@@ -1,0 +1,75 @@
+/* You can add global styles to this file, and also import other style files */
+.container {
+    display: inline-block;
+    text-align: left;
+    vertical-align: top;
+    width: 320px;
+}
+    .item {
+        margin-top: 2px;
+        position: relative;
+        width: 270px;
+    }
+        label {
+            display: inline-block;
+            height: 20px;
+            margin: 2px 5px;
+            text-align: left;
+            position: absolute;
+        }
+        .validation-icon {
+            background-repeat: no-repeat;
+            display: none;
+            position: absolute;
+            height: 22px;
+            width: 22px;
+            right: 5px;
+            margin-top: -26px;
+        }
+        .error-container {
+            background-color: red;
+            position: absolute;
+            margin-top: -231px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            width: 100%;
+            white-space: nowrap;
+        }
+
+        .responce {
+            font-size: 0.9em;
+            color:rgb(24, 123, 156);
+        }
+        .error-responce {
+            font-size: 0.9em;
+            color:red;
+        }
+
+        .error {
+            font-size: 0.9em;
+            color: #FFF;
+            padding: 2px;
+            display: inline-block;
+        }
+
+        .icon-success {
+            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' width='512' height='512'%3E%3Cpath fill='rgb(255,255,255)' d='M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z'/%3E%3C/svg%3E");
+              background-color: #5cb85c;;
+              background-size: 75%;
+            background-position-x: 50%;
+            background-position-y: 70%;
+            border-radius: 50%;
+            background-repeat: no-repeat;
+          }
+          
+          .icon-fail {
+            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' width='512' height='512'%3E%3Cpath fill='rgb(255,255,255)' d='M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm121.6 313.1c4.7 4.7 4.7 12.3 0 17L338 377.6c-4.7 4.7-12.3 4.7-17 0L256 312l-65.1 65.6c-4.7 4.7-12.3 4.7-17 0L134.4 338c-4.7-4.7-4.7-12.3 0-17l65.6-65-65.6-65.1c-4.7-4.7-4.7-12.3 0-17l39.6-39.6c4.7-4.7 12.3-4.7 17 0l65 65.7 65.1-65.6c4.7-4.7 12.3-4.7 17 0l39.6 39.6c4.7 4.7 4.7 12.3 0 17L312 256l65.6 65.1z'/%3E%3C/svg%3E");
+              background-color: #d9534f;
+              background-size: 75%;
+            background-position-x: 55%;
+            background-position-y: 55%;
+            border-radius: 50%;
+            background-repeat: no-repeat;
+          }
+          

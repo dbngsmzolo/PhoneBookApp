@@ -1,0 +1,43 @@
+
+<h2>Phone Book</h2>
+
+<div *ngIf="phoneBooks">
+    <table>
+        <tr>
+            <th>Phone Book Name</th>
+        </tr>
+        <tr *ngFor="let item of phoneBooks; index as i; trackBy: trackByFn">
+            <td (click)="openPhoneBook(item)">{{item.name}}</td>
+        </tr>
+    </table>
+</div>
+
+<button *ngIf="currentPhoneBook" (click)="newEntry=true">Add Entry to {{currentPhoneBook.name}}</button>
+<div *ngIf="entires.length > 0 && newEntry ===false">
+    <table>
+        <tr>
+            <th>Entry Name</th><th>Phone Number</th>
+        </tr>
+        <tr *ngFor="let item of entires; index as i; trackBy: trackByFn">
+            <td>{{item.name}}</td>
+            <td>{{item.phoneNumber}}</td>
+        </tr>
+    </table>
+</div>
+
+<form *ngIf="newEntry" name="entryForm" [formGroup]="entryForm" [hidden]="submitted">
+    <div class="container">
+      <div class="item">
+        
+        <input placeholder="Enter name"  type="text" id="name" tabindex="1" formControlName="name"/><br/>
+        <input placeholder="Enter phone number"  type="text" id="phoneNumber" tabindex="2" formControlName="phoneNumber"/>
+      </div>
+      
+    </div>
+    <div>
+      <input type="submit" value="Save" class="primary" tabindex="3" (click)='submit()'>
+    </div>
+  </form>
+
+  <p *ngIf="requestServer" class="responce">{{responseMessage}}</p>
+  <p *ngIf="requestServer" class="error-responce">{{errorMessage}}</p>

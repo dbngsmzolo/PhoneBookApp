@@ -11,7 +11,28 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneBookApp.Data", "PhoneB
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneBookApp.Services", "PhoneBookApp.Services\PhoneBookApp.Services.csproj", "{C9598229-00BF-40DE-BE2D-493A5596FAFD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneBookApp.Tests", "PhoneBookApp.Tests\PhoneBookApp.Tests.csproj", "{2D4B5976-071E-47B7-9720-8E2233B9A22C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneBookApp.Tests", "PhoneBookApp.Tests\PhoneBookApp.Tests.csproj", "{2D4B5976-071E-47B7-9720-8E2233B9A22C}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "PhoneBookApp.UI(1)", "PhoneBookApp.UI\", "{015831E1-BC23-461C-B137-2AB5CB77F4EC}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_58390"
+		Debug.AspNetCompiler.PhysicalPath = "PhoneBookApp.UI\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_58390\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_58390"
+		Release.AspNetCompiler.PhysicalPath = "PhoneBookApp.UI\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_58390\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "58390"
+		SlnRelativePath = "PhoneBookApp.UI\"
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +60,10 @@ Global
 		{2D4B5976-071E-47B7-9720-8E2233B9A22C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D4B5976-071E-47B7-9720-8E2233B9A22C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D4B5976-071E-47B7-9720-8E2233B9A22C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{015831E1-BC23-461C-B137-2AB5CB77F4EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{015831E1-BC23-461C-B137-2AB5CB77F4EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{015831E1-BC23-461C-B137-2AB5CB77F4EC}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{015831E1-BC23-461C-B137-2AB5CB77F4EC}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
