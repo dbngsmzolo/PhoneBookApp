@@ -1,8 +1,9 @@
 ﻿using PhoneBookApp.Data;
 using PhoneBookApp.Data.Ef.Concrete;
 using PhoneBookApp.Data.Ef.Repository.Interfaces;
+using PhoneBookApp.Data.Mappings;
+using PhoneBookApp.Data.Models;
 using PhoneBookApp.Services.Interfaces;
-using System;
 using System.Collections.Generic;
 
 namespace PhoneBookApp.Services.Concrete
@@ -18,43 +19,39 @@ namespace PhoneBookApp.Services.Concrete
             _pbService = pbService;
             _context = context;
         }
-        public int Add(Entry entry)
+
+        public int Add(EntryModel model)
         {
-            int entryId =_entryRepo.Add(entry, _context).Id;
-            PhoneBook pb = _pbService.Get(entry.PhoneBookId);
-            if(pb.Entries == null)
-            {
-                pb.Entries = new List<Entry>();
-            }
-            pb.Entries.Add(entry);
-            _pbService.Update(pb);
+            var entry = ToData.ToEntryData(model);
+            int entryId = _entryRepo.Add(entry, _context).Id;
+            var phoneBook = _pbService.Get(entry.PhoneBookId);
+
+            if (phoneBook.Entries == null) phoneBook.Entries = new List<Entry>();
+
+            phoneBook.Entries.Add(entry);
+            _pbService.Update(phoneBook);
+
             return entryId;
         }
 
-        public bool Delete(int EntryId)
+        public bool Delete(int? entryId)
         {
-            var entry = _entryRepo.Get(u => u.Id == EntryId, _context);
+            var entry = _entryRepo.Get(u => u.Id == entryId, _context);
             return entry != null ? _entryRepo.Delete(entry, _context) : false;
         }
 
-        public Entry Get(int id)
+        public EntryModel Get(int? id)
         {
-            return _entryRepo.Get(u => u.Id == id, _context);
+            var entry = _entryRepo.Get(u => u.Id == id, _context);
+
+            return ToModel.ToEntryModel(entry);
         }
 
-        public List<Entry> GetAll()
+        public List<EntryModel> GetAllForPhoneBook(int? phoneBookId)
         {
-            return _entryRepo.GetList(_context);
-        }
+            var list = _entryRepo.GetList(_context, e => e.PhoneBookId == phoneBookId);
 
-        public List<Entry> GetAll(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        List<Entry> IEntryService.GetAllForPhoneBook(int phoneBookId)
-        {
-            return _entryRepo.GetList(_context, e => e.PhoneBookId == phoneBookId);
+            return ToModel.ToEntryModelList(list);
 
         }
     }

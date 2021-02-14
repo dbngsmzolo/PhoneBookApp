@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using PhoneBookApp.Data.Ef.Concrete;
-using PhoneBookApp.Services.Interfaces;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Cors;
+﻿using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
+using PhoneBookApp.Data.Ef.Concrete;
+using PhoneBookApp.Data.Models;
+using PhoneBookApp.Services.Interfaces;
+using System.Collections.Generic;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
 
 namespace PhoneBookApp.API.Controllers
 {
@@ -24,22 +22,31 @@ namespace PhoneBookApp.API.Controllers
 
         [HttpGet]
         [Route("getall")]
-        public ActionResult<List<Entry>> Get(int id)
+        public ActionResult<List<Entry>> Get(int? phoneBookId)
         {
-            return Ok(_entryService.GetAllForPhoneBook(id));
+            if (phoneBookId == null)
+                return BadRequest(ModelState);
+
+            return Ok(_entryService.GetAllForPhoneBook(phoneBookId));
         }
 
-        [HttpPut]
+        [HttpPost]
         [Route("add")]
-        public ActionResult Add(Entry entry)
+        public ActionResult Add(EntryModel model)
         {
-            return Ok(_entryService.Add(entry));
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            return Ok(_entryService.Add(model));
         }
 
         [HttpDelete]
         [Route("Delete")]
-        public ActionResult Delete(int entryId)
+        public ActionResult Delete(int? entryId)
         {
+            if (entryId == null)
+                return BadRequest(ModelState);
+
             return Ok(_entryService.Delete(entryId));
         }
     }

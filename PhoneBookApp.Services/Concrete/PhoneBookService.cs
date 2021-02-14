@@ -1,8 +1,9 @@
 ﻿using PhoneBookApp.Data;
 using PhoneBookApp.Data.Ef.Concrete;
 using PhoneBookApp.Data.Ef.Repository.Interfaces;
+using PhoneBookApp.Data.Mappings;
+using PhoneBookApp.Data.Models;
 using PhoneBookApp.Services.Interfaces;
-using System;
 using System.Collections.Generic;
 
 namespace PhoneBookApp.Services.Concrete
@@ -16,30 +17,35 @@ namespace PhoneBookApp.Services.Concrete
             _phoneBookRepo = phoneBookRepo;
             _context = context;
         }
-        public int Add(PhoneBook pb)
+        public int Add(PhoneBookModel model)
         {
-            return _phoneBookRepo.Add(pb, _context).Id;
+            var phoneBook = ToData.ToPhoneBookData(model);
+
+            return _phoneBookRepo.Add(phoneBook, _context).Id;
         }
 
-        public bool Delete(int pb)
+        public bool Delete(int? phoneBookId)
         {
-            var entry = _phoneBookRepo.Get(u => u.Id == pb, _context);
+            var entry = _phoneBookRepo.Get(u => u.Id == phoneBookId, _context);
+
             return entry != null ? _phoneBookRepo.Delete(entry, _context) : false;
         }
 
-        public PhoneBook Get(int id)
+        public PhoneBook Get(int? id)
         {
             return _phoneBookRepo.Get(u => u.Id == id, _context);
         }
 
-        public List<PhoneBook> GetAll()
+        public List<PhoneBookModel> GetAll()
         {
-            return _phoneBookRepo.GetList(_context);
+            var list = _phoneBookRepo.GetList(_context);
+
+            return ToModel.ToPhoneBookModelList(list);
         }
 
-        public PhoneBook Update(PhoneBook pb)
+        public void Update(PhoneBook phoneBook)
         {
-            return _phoneBookRepo.Update(pb, _context);
+            _phoneBookRepo.Update(phoneBook, _context);
         }
     }
 }

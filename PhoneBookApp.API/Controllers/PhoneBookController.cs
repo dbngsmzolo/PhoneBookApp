@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using PhoneBookApp.Data.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -23,31 +24,30 @@ namespace PhoneBookApp.API.Controllers
         }
 
         [HttpGet]
-        [Route("get")]
-        public ActionResult<Entry> Get(int id)
-        {
-            return Ok(_pbService.Get(id));
-        }
-
-        [HttpGet]
         [Route("getall")]
         public ActionResult<List<PhoneBook>> Get()
         {
             return Ok(_pbService.GetAll());
         }
 
-        [HttpPut]
+        [HttpPost]
         [Route("add")]
-        public ActionResult Add(PhoneBook pb)
+        public ActionResult Add(PhoneBookModel model)
         {
-            return Ok(_pbService.Add(pb));
+            if(!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            return Ok(_pbService.Add(model));
         }
 
         [HttpDelete]
         [Route("Delete")]
-        public ActionResult Delete(int pbId)
+        public ActionResult Delete(int? phoneBookId)
         {
-            return Ok(_pbService.Delete(pbId));
+            if (phoneBookId == null)
+                return BadRequest(ModelState);
+
+            return Ok(_pbService.Delete(phoneBookId));
         }
     }
 }
